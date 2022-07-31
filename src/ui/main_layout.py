@@ -53,9 +53,9 @@ layout = [
 ]
 window = sg.Window(title="Ragdoll sprite creator", layout=layout)
 
-while True:
-    event, value = window.read()
-    if event == sg.WIN_CLOSED:
-        break
-
-window.close()
+def create_main_window():
+    while True:
+        event, value = window.read()
+        if event == sg.WIN_CLOSED:
+            break
+    window.close()

@@ -12,7 +12,12 @@ left_toolbar = [
     sg.Button("3"),
 ]
 left_workspace = [
-    sg.Canvas(size=(500,500), background_color="#fff")
+    sg.Graph(   canvas_size=(500,500),
+                graph_bottom_left=(-100,-100),
+                graph_top_right=(100,100),
+                background_color="#fff",
+                key="node-canvas",
+                enable_events=True,)
 ]
 left_browser = [
     sg.Listbox(values=[], size=(50, 5))
@@ -31,7 +36,10 @@ right_toolbar = [
     sg.Button("3"),
 ]
 right_workspace = [
-    sg.Canvas(size=(500,500), background_color="#fff")
+    sg.Graph(   canvas_size=(500,500),
+                graph_bottom_left=(-100,-100),
+                graph_top_right=(100,100),
+                background_color="#fff")
 ]
 right_browser = [
     sg.Listbox(values=[], size=(50, 5))
@@ -55,7 +63,16 @@ window = sg.Window(title="Ragdoll sprite creator", layout=layout)
 
 def create_main_window():
     while True:
-        event, value = window.read()
+        event, values = window.read()
+        # event, values = window.read(timeout=100) # this will update the window every 100ms
+
         if event == sg.WIN_CLOSED:
             break
+
+        if event == "node-canvas":
+            window["node-canvas"].erase()
+            window["node-canvas"].draw_rectangle((0,0), (100,100), fill_color="red")
+            window["node-canvas"].draw_text("Hello World", (50,50))
     window.close()
+
+create_main_window()
